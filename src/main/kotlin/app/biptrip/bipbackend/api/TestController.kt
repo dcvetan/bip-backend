@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 class TestController {
 
     @GetMapping
-    suspend fun verifyPurchase(): ResponseEntity<Unit> {
+    fun verifyPurchase(): ResponseEntity<Unit> {
         return ResponseEntity.ok().build()
     }
 
