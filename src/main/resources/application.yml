@@ -1,1 +1,10 @@
+spring:
+  jooq:
+    sql-dialect: POSTGRES
+  datasource:
+    url: jdbc:postgresql://dpg-d0m69h0gjchc739j9c80-a/bip_0jbs
+    username: bip_0jbs_user
+    password: ym20xqxCw0oVd10yCmRMFqKzI2JsIfHD
+
+
 

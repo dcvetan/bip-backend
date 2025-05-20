@@ -5,3 +5,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
+
+#spring:
+#  jooq:
+#    sql-dialect: POSTGRES
+#  datasource:
+#    url: jdbc:postgresql://dpg-d0m69h0gjchc739j9c80-a.frankfurt-postgres.render.com/bip_0jbs
+#    username: bip_0jbs_user
+#    password: ym20xqxCw0oVd10yCmRMFqKzI2JsIfHD
