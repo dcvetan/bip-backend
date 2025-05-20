@@ -21,9 +21,13 @@
         <postgresql.version>42.7.5</postgresql.version>
         <flyway.version>11.8.0</flyway.version>
         <jooq.version>3.20.3</jooq.version>
-        <db.url>jdbc:postgresql://dpg-d0m69h0gjchc739j9c80-a/bip_0jbs</db.url>
-        <db.user>bip_0jbs_user</db.user>
-        <db.password>ym20xqxCw0oVd10yCmRMFqKzI2JsIfHD</db.password>
+<!--        <db.url>jdbc:postgresql://dpg-d0m69h0gjchc739j9c80-a/bip_0jbs</db.url>-->
+<!--        <db.user>bip_0jbs_user</db.user>-->
+<!--        <db.password>ym20xqxCw0oVd10yCmRMFqKzI2JsIfHD</db.password>-->
+
+        <db.url>jdbc:postgresql://localhost:5432/postgres</db.url>
+        <db.user>postgres</db.user>
+        <db.password>postgres</db.password>
     </properties>
     <dependencies>
         <dependency>
@@ -112,8 +116,8 @@
                             <inputSchema>public</inputSchema>
                         </database>
                         <target>
-                            <packageName>app.bip-backend.generated.jooq</packageName>
-                            <directory>${project.build.directory}/generated-sources/jooq</directory>
+                            <packageName>app.biptrip.bipbackend.jooq</packageName>
+                            <directory>${project.basedir}/src/main/java</directory>
                         </target>
                     </generator>
                 </configuration>
@@ -162,20 +166,6 @@
                         <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                <sourceDir>${project.build.directory}/generated-sources/jooq</sourceDir>
-                            </sourceDirs>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>

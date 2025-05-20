@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:17.0
-    container_name: db
+    container_name: db-bip
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

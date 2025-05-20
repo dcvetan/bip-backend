@@ -1,12 +1,12 @@
 package app.biptrip.bipbackend.api
 
-import app.bip_backend.generated.jooq.Tables
-import app.bip_backend.generated.jooq.tables.records.UsersRecord
+import app.biptrip.bipbackend.jooq.Tables
 import org.jooq.DSLContext
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import app.biptrip.bipbackend.jooq.tables.records.UsersRecord
+import org.springframework.http.ResponseEntity
 
 @RestController
 @RequestMapping("/test")
