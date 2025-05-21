@@ -16,11 +16,6 @@ class EmailService(
 
         @Value("\${secrets.api-key.brevo}")
         private val apiKey: String,
-
-        @Value("\${mailing.sender.name}")
-        private val senderName: String,
-        @Value("\${mailing.sender.email}")
-        private val senderEmail: String,
 ) {
 
     suspend fun sendVerificationEmail(toEmail: String, verificationLink: String) {
