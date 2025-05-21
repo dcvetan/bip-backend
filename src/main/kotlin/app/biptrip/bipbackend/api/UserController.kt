@@ -35,7 +35,10 @@ class UserController(
     fun register(@RequestBody loginRequest: LoginRequest): ResponseEntity<Unit> {
 
         val existingUser = userRepository.findUserByEmail(loginRequest.email)
-                           ?: return ResponseEntity.status(HttpStatus.CONFLICT).build()
+
+        if (existingUser != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build()
+        }
 
         val newUser = userRepository.createUser(
                 email = loginRequest.email,
