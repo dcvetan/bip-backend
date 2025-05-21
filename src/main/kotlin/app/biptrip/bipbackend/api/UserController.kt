@@ -23,7 +23,7 @@ class UserController(
         val user = userRepository.findUserByEmail(loginRequest.email)
                    ?: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
 
-        if (passwordEncoder.matches(loginRequest.password, user.password)) {
+        if (!passwordEncoder.matches(loginRequest.password, user.password)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
         }
 
