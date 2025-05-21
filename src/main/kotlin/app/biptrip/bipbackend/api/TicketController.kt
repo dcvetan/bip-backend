@@ -36,6 +36,7 @@ class TicketController(
                     eventId = ticket.eventId,
                     userId = ticket.userId,
                     reservationNumber = ticket.reservationNumber,
+                    qrUrl = ticket.qrUrl
             )
         })
     }
@@ -59,6 +60,7 @@ class TicketController(
                         eventId = ticket.eventId,
                         userId = ticket.userId,
                         reservationNumber = "AX3O85HLM",
+                        qrUrl = qrUrl
                 )
         )
     }
