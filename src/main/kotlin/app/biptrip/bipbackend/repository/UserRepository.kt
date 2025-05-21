@@ -21,4 +21,10 @@ class UserRepository(val dslContext: DSLContext) {
             .fetchOne()
     }
 
+    fun findUserById(id: Int): UsersRecord? {
+        return dslContext.selectFrom(USERS)
+            .where(USERS.ID.eq(id))
+            .fetchOne()
+    }
+
 }

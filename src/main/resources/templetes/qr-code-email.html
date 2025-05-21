@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Your Mobile Ticket Receipt</title>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #999999; margin: 0; padding: 0;">
+
+<!-- Outer Container -->
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #C8C8C8; padding: 20px 0;">
+    <tr>
+        <td align="center">
+
+            <!-- Receipt Box -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 400px; width: 100%; background-color: #ffffff; border-radius: 12px 12px 0 0; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+                <tr>
+                    <td style="padding: 20px;">
+                        <h2 style="margin: 0 0 10px 0; font-size: 20px; color:#112537;">Thank you for your purchase</h2>
+                        <p style="margin: 0; font-size: 15px; color: #333;">This email confirms your ticket purchase. Please find your entry details below. Present the QR code at the venue for admission.</p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Ticket Wrapper -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 400px; width: 100%; background-color: #ffffff; border-radius: 0 0 12px 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-top: 0;">
+
+                <!-- Ticket Info -->
+                <tr>
+                    <td style="padding: 20px;">
+                        <p style="margin: 4px 0; font-size: 16px; color: #333;"><strong>Date:</strong> August 15, 2025</p>
+                        <p style="margin: 4px 0; font-size: 16px; color: #333;"><strong>Time:</strong> 7:00 PM</p>
+                        <p style="margin: 4px 0; font-size: 16px; color: #333;"><strong>Venue:</strong> Madison Square Garden</p>
+                    </td>
+                </tr>
+
+                <!-- QR Code with custom image -->
+                <tr>
+                    <td style="padding: 20px; text-align: center;">
+                        <img src="%s" alt="QR Code" style="width: 60%; max-width: 160px; height: auto; display: block; margin: 0 auto;" />
+                        <p style="font-size: 13px; color: #666; margin-top: 8px;">Scan this QR code at entry</p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Logo -->
+            <!-- Logo -->
+            <table role="presentation" width="100%" style="max-width: 400px; margin-top: 20px;" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="center">
+                        <img src="https://i.imgur.com/DayJtQe.png" alt="ErasMeet Logo" style="width: 120px; height: auto; display: block;" />
+                        <p style="font-size: 13px; color: #555; margin-top: 10px; font-style: italic;">“Where every era meets, and every moment matters.”</p>
+                    </td>
+                </tr>
+            </table>
+
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

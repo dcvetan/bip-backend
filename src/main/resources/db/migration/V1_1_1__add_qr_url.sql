@@ -1,0 +1,1 @@
+ALTER TABLE tickets ADD COLUMN qr_url VARCHAR(255);

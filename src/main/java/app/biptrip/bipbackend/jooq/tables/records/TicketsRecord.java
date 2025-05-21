@@ -74,6 +74,20 @@ public class TicketsRecord extends UpdatableRecordImpl<TicketsRecord> {
         return (String) get(3);
     }
 
+    /**
+     * Setter for <code>public.tickets.qr_url</code>.
+     */
+    public void setQrUrl(String value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>public.tickets.qr_url</code>.
+     */
+    public String getQrUrl() {
+        return (String) get(4);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -97,13 +111,14 @@ public class TicketsRecord extends UpdatableRecordImpl<TicketsRecord> {
     /**
      * Create a detached, initialised TicketsRecord
      */
-    public TicketsRecord(Integer id, Integer eventId, Integer userId, String reservationNumber) {
+    public TicketsRecord(Integer id, Integer eventId, Integer userId, String reservationNumber, String qrUrl) {
         super(Tickets.TICKETS);
 
         setId(id);
         setEventId(eventId);
         setUserId(userId);
         setReservationNumber(reservationNumber);
+        setQrUrl(qrUrl);
         resetTouchedOnNotNull();
     }
 }
