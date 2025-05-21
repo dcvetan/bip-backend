@@ -22,13 +22,13 @@
         <flyway.version>11.8.0</flyway.version>
         <jooq.version>3.20.3</jooq.version>
         <jackson.version>2.18.3</jackson.version>
-<!--        <db.url>jdbc:postgresql://dpg-d0m69h0gjchc739j9c80-a/bip_0jbs</db.url>-->
-<!--        <db.user>bip_0jbs_user</db.user>-->
-<!--        <db.password>ym20xqxCw0oVd10yCmRMFqKzI2JsIfHD</db.password>-->
+        <db.url>jdbc:postgresql://dpg-d0m69h0gjchc739j9c80-a/bip_0jbs</db.url>
+        <db.user>bip_0jbs_user</db.user>
+        <db.password>ym20xqxCw0oVd10yCmRMFqKzI2JsIfHD</db.password>
 
-        <db.url>jdbc:postgresql://localhost:5432/postgres</db.url>
-        <db.user>postgres</db.user>
-        <db.password>postgres</db.password>
+<!--        <db.url>jdbc:postgresql://localhost:5432/postgres</db.url>-->
+<!--        <db.user>postgres</db.user>-->
+<!--        <db.password>postgres</db.password>-->
     </properties>
     <dependencies>
         <dependency>
