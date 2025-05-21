@@ -16,6 +16,9 @@ data class Event(
     val location: String,
     val price: Int,
 
+    @JsonProperty("tickets_available")
+    val ticketsAvailable: Int,
+
     @JsonProperty("image_url")
     val imageUrl: String,
 )

@@ -25,7 +25,8 @@ class EventController(
                     endTime = event.endTime,
                     location = event.location,
                     price = event.price,
-                    imageUrl = event.imageUrl
+                    imageUrl = event.imageUrl,
+                    ticketsAvailable = event.ticketsAvailable,
             )
         })
     }

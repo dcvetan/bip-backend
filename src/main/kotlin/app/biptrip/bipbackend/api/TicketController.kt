@@ -2,13 +2,16 @@ package app.biptrip.bipbackend.api
 
 import app.biptrip.bipbackend.api.model.Ticket
 import app.biptrip.bipbackend.jooq.tables.records.TicketsRecord
+import app.biptrip.bipbackend.repository.EventRepository
 import app.biptrip.bipbackend.repository.TicketRepository
 import app.biptrip.bipbackend.repository.UserRepository
 import app.biptrip.bipbackend.service.EmailService
 import app.biptrip.bipbackend.service.QrService
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -20,7 +23,8 @@ class TicketController(
         private val ticketRepository: TicketRepository,
         private val qrService: QrService,
         private val emailService: EmailService,
-        private val userRepository: UserRepository
+        private val userRepository: UserRepository,
+        private val eventRepository: EventRepository
 ) {
 
     @GetMapping
@@ -37,15 +41,17 @@ class TicketController(
     }
 
     @PostMapping
-    suspend fun buyTicket(userId: Int, eventId: Int): ResponseEntity<Ticket> {
+    suspend fun buyTicket(@RequestBody request: BuyTicketRequest): ResponseEntity<Ticket> {
 
-        val ticket = ticketRepository.insert(userId, eventId)
+        val ticket = ticketRepository.insert(request.userId, request.eventId)
         val qrUrl = qrService.generateQrCode("https://bip-backend-b1ew.onrender.com/ticket/validate?ticketId=${ticket!!.id}")
         ticketRepository.addQrUrl(ticket.id, qrUrl)
 
-        val user = userRepository.findUserById(userId)
+        val user = userRepository.findUserById(request.userId)
 
         emailService.sendVerificationEmail(user!!.email, qrUrl)
+
+        eventRepository.decrementTickets(request.eventId)
 
         return ResponseEntity.ok(
                 Ticket(
@@ -66,5 +72,12 @@ class TicketController(
 
         return ResponseEntity.ok().build()
     }
+
+    data class BuyTicketRequest(
+            @JsonProperty("user_id")
+        val userId: Int,
+            @JsonProperty("event_id")
+        val eventId: Int
+    )
 
 }
