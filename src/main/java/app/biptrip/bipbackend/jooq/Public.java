@@ -4,6 +4,8 @@
 package app.biptrip.bipbackend.jooq;
 
 
+import app.biptrip.bipbackend.jooq.tables.Events;
+import app.biptrip.bipbackend.jooq.tables.Tickets;
 import app.biptrip.bipbackend.jooq.tables.Users;
 
 import java.util.Arrays;
@@ -29,6 +31,16 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
+     * The table <code>public.events</code>.
+     */
+    public final Events EVENTS = Events.EVENTS;
+
+    /**
+     * The table <code>public.tickets</code>.
+     */
+    public final Tickets TICKETS = Tickets.TICKETS;
+
+    /**
      * The table <code>public.users</code>.
      */
     public final Users USERS = Users.USERS;
@@ -49,6 +61,8 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Events.EVENTS,
+            Tickets.TICKETS,
             Users.USERS
         );
     }

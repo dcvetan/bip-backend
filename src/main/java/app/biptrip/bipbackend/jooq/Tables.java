@@ -4,6 +4,8 @@
 package app.biptrip.bipbackend.jooq;
 
 
+import app.biptrip.bipbackend.jooq.tables.Events;
+import app.biptrip.bipbackend.jooq.tables.Tickets;
 import app.biptrip.bipbackend.jooq.tables.Users;
 
 
@@ -12,6 +14,16 @@ import app.biptrip.bipbackend.jooq.tables.Users;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>public.events</code>.
+     */
+    public static final Events EVENTS = Events.EVENTS;
+
+    /**
+     * The table <code>public.tickets</code>.
+     */
+    public static final Tickets TICKETS = Tickets.TICKETS;
 
     /**
      * The table <code>public.users</code>.

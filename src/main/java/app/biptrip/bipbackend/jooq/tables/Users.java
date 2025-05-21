@@ -6,6 +6,7 @@ package app.biptrip.bipbackend.jooq.tables;
 
 import app.biptrip.bipbackend.jooq.Keys;
 import app.biptrip.bipbackend.jooq.Public;
+import app.biptrip.bipbackend.jooq.tables.Tickets.TicketsPath;
 import app.biptrip.bipbackend.jooq.tables.records.UsersRecord;
 
 import java.util.Arrays;
@@ -14,10 +15,14 @@ import java.util.List;
 
 import org.jooq.Condition;
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
+import org.jooq.InverseForeignKey;
 import org.jooq.Name;
+import org.jooq.Path;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
+import org.jooq.Record;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -96,6 +101,39 @@ public class Users extends TableImpl<UsersRecord> {
         this(DSL.name("users"), null);
     }
 
+    public <O extends Record> Users(Table<O> path, ForeignKey<O, UsersRecord> childPath, InverseForeignKey<O, UsersRecord> parentPath) {
+        super(path, childPath, parentPath, USERS);
+    }
+
+    /**
+     * A subtype implementing {@link Path} for simplified path-based joins.
+     */
+    public static class UsersPath extends Users implements Path<UsersRecord> {
+
+        private static final long serialVersionUID = 1L;
+        public <O extends Record> UsersPath(Table<O> path, ForeignKey<O, UsersRecord> childPath, InverseForeignKey<O, UsersRecord> parentPath) {
+            super(path, childPath, parentPath);
+        }
+        private UsersPath(Name alias, Table<UsersRecord> aliased) {
+            super(alias, aliased);
+        }
+
+        @Override
+        public UsersPath as(String alias) {
+            return new UsersPath(DSL.name(alias), this);
+        }
+
+        @Override
+        public UsersPath as(Name alias) {
+            return new UsersPath(alias, this);
+        }
+
+        @Override
+        public UsersPath as(Table<?> alias) {
+            return new UsersPath(alias.getQualifiedName(), this);
+        }
+    }
+
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
@@ -114,6 +152,19 @@ public class Users extends TableImpl<UsersRecord> {
     @Override
     public List<UniqueKey<UsersRecord>> getUniqueKeys() {
         return Arrays.asList(Keys.USERS_EMAIL_KEY);
+    }
+
+    private transient TicketsPath _tickets;
+
+    /**
+     * Get the implicit to-many join path to the <code>public.tickets</code>
+     * table
+     */
+    public TicketsPath tickets() {
+        if (_tickets == null)
+            _tickets = new TicketsPath(this, null, Keys.TICKETS__FK_USER.getInverseKey());
+
+        return _tickets;
     }
 
     @Override

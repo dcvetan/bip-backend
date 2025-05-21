@@ -4,13 +4,19 @@
 package app.biptrip.bipbackend.jooq;
 
 
+import app.biptrip.bipbackend.jooq.tables.Events;
+import app.biptrip.bipbackend.jooq.tables.Tickets;
 import app.biptrip.bipbackend.jooq.tables.Users;
+import app.biptrip.bipbackend.jooq.tables.records.EventsRecord;
+import app.biptrip.bipbackend.jooq.tables.records.TicketsRecord;
 import app.biptrip.bipbackend.jooq.tables.records.UsersRecord;
 
+import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
+import org.jooq.impl.QOM.ForeignKeyRule;
 
 
 /**
@@ -24,6 +30,15 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<EventsRecord> EVENTS_PKEY = Internal.createUniqueKey(Events.EVENTS, DSL.name("events_pkey"), new TableField[] { Events.EVENTS.ID }, true);
+    public static final UniqueKey<TicketsRecord> TICKETS_PKEY = Internal.createUniqueKey(Tickets.TICKETS, DSL.name("tickets_pkey"), new TableField[] { Tickets.TICKETS.ID }, true);
     public static final UniqueKey<UsersRecord> USERS_EMAIL_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_email_key"), new TableField[] { Users.USERS.EMAIL }, true);
     public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_pkey"), new TableField[] { Users.USERS.ID }, true);
+
+    // -------------------------------------------------------------------------
+    // FOREIGN KEY definitions
+    // -------------------------------------------------------------------------
+
+    public static final ForeignKey<TicketsRecord, EventsRecord> TICKETS__FK_EVENT = Internal.createForeignKey(Tickets.TICKETS, DSL.name("fk_event"), new TableField[] { Tickets.TICKETS.EVENT_ID }, Keys.EVENTS_PKEY, new TableField[] { Events.EVENTS.ID }, true, ForeignKeyRule.CASCADE, ForeignKeyRule.NO_ACTION);
+    public static final ForeignKey<TicketsRecord, UsersRecord> TICKETS__FK_USER = Internal.createForeignKey(Tickets.TICKETS, DSL.name("fk_user"), new TableField[] { Tickets.TICKETS.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true, ForeignKeyRule.CASCADE, ForeignKeyRule.NO_ACTION);
 }
