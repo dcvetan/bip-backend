@@ -1,7 +1,6 @@
 package app.biptrip.bipbackend.api
 
 import app.biptrip.bipbackend.api.model.Ticket
-import app.biptrip.bipbackend.jooq.tables.records.TicketsRecord
 import app.biptrip.bipbackend.repository.EventRepository
 import app.biptrip.bipbackend.repository.TicketRepository
 import app.biptrip.bipbackend.repository.UserRepository
@@ -9,13 +8,7 @@ import app.biptrip.bipbackend.service.EmailService
 import app.biptrip.bipbackend.service.QrService
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
-import java.util.UUID
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/ticket")
@@ -68,7 +61,7 @@ class TicketController(
     @GetMapping("/validate")
     fun validateTicket(@RequestParam ticketId: Int): ResponseEntity<Unit> {
         ticketRepository.findByTicketId(ticketId)
-                ?: return ResponseEntity.notFound().build()
+        ?: return ResponseEntity.notFound().build()
 
         ticketRepository.deleteById(ticketId)
 
@@ -77,9 +70,9 @@ class TicketController(
 
     data class BuyTicketRequest(
             @JsonProperty("user_id")
-        val userId: Int,
+            val userId: Int,
             @JsonProperty("event_id")
-        val eventId: Int
+            val eventId: Int
     )
 
 }
