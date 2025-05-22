@@ -8,8 +8,6 @@ data class Ticket(
         val eventId: Int,
         @JsonProperty("user_id")
         val userId: Int,
-        @JsonProperty("reservation_number")
-        val reservationNumber: String,
         @JsonProperty("qr_url")
         val qrUrl: String
 )

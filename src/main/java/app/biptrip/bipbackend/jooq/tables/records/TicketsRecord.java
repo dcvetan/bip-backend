@@ -61,31 +61,17 @@ public class TicketsRecord extends UpdatableRecordImpl<TicketsRecord> {
     }
 
     /**
-     * Setter for <code>public.tickets.reservation_number</code>.
-     */
-    public void setReservationNumber(String value) {
-        set(3, value);
-    }
-
-    /**
-     * Getter for <code>public.tickets.reservation_number</code>.
-     */
-    public String getReservationNumber() {
-        return (String) get(3);
-    }
-
-    /**
      * Setter for <code>public.tickets.qr_url</code>.
      */
     public void setQrUrl(String value) {
-        set(4, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>public.tickets.qr_url</code>.
      */
     public String getQrUrl() {
-        return (String) get(4);
+        return (String) get(3);
     }
 
     // -------------------------------------------------------------------------
@@ -111,13 +97,12 @@ public class TicketsRecord extends UpdatableRecordImpl<TicketsRecord> {
     /**
      * Create a detached, initialised TicketsRecord
      */
-    public TicketsRecord(Integer id, Integer eventId, Integer userId, String reservationNumber, String qrUrl) {
+    public TicketsRecord(Integer id, Integer eventId, Integer userId, String qrUrl) {
         super(Tickets.TICKETS);
 
         setId(id);
         setEventId(eventId);
         setUserId(userId);
-        setReservationNumber(reservationNumber);
         setQrUrl(qrUrl);
         resetTouchedOnNotNull();
     }

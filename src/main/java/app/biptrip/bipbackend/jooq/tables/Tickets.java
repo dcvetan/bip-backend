@@ -74,11 +74,6 @@ public class Tickets extends TableImpl<TicketsRecord> {
     public final TableField<TicketsRecord, Integer> USER_ID = createField(DSL.name("user_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>public.tickets.reservation_number</code>.
-     */
-    public final TableField<TicketsRecord, String> RESERVATION_NUMBER = createField(DSL.name("reservation_number"), SQLDataType.VARCHAR(255), this, "");
-
-    /**
      * The column <code>public.tickets.qr_url</code>.
      */
     public final TableField<TicketsRecord, String> QR_URL = createField(DSL.name("qr_url"), SQLDataType.VARCHAR(255), this, "");
