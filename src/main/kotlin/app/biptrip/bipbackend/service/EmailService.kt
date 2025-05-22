@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
 import java.time.Duration
+import java.time.LocalDateTime
 
 @Service
 class EmailService(
@@ -18,10 +19,16 @@ class EmailService(
         private val apiKey: String,
 ) {
 
-    suspend fun sendVerificationEmail(toEmail: String, verificationLink: String) {
+    suspend fun sendVerificationEmail(toEmail: String, verificationLink: String, date: LocalDateTime, location: String) {
         try {
             val template = loadTemplate("qr-code-email.html")
-            val htmlContent = template.replace("%s", verificationLink)
+            val formattedDate = date.format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy."))
+            val formattedTime = date.format(java.time.format.DateTimeFormatter.ofPattern("hh:mm a"))
+            val htmlContent = template
+                .replace("%d", formattedDate)
+                .replace("%t", formattedTime)
+                .replace("%l", location)
+                .replace("%s", verificationLink)
 
             webClient.post()
                 .uri("https://api.brevo.com/v3/smtp/email")

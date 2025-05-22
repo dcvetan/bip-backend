@@ -18,6 +18,12 @@ class EventRepository(val dslContext: DSLContext) {
             .execute()
     }
 
+    fun findById(id: Int): EventsRecord? {
+        return dslContext.selectFrom(EVENTS)
+            .where(EVENTS.ID.eq(id))
+            .fetchOne()
+    }
+
     fun decrementTickets(eventId: Int): Int {
         return dslContext.update(EVENTS)
             .set(EVENTS.TICKETS_AVAILABLE, EVENTS.TICKETS_AVAILABLE - 1)

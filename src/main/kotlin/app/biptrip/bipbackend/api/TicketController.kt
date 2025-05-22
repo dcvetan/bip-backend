@@ -37,12 +37,27 @@ class TicketController(
     suspend fun buyTicket(@RequestBody request: BuyTicketRequest): ResponseEntity<Ticket> {
 
         val ticket = ticketRepository.insert(request.userId, request.eventId)
-        val qrUrl = qrService.generateQrCode("https://bip-backend-b1ew.onrender.com/ticket/validate?ticketId=${ticket!!.id}")
+        val qrUrl: String
+        try {
+            qrUrl = qrService.generateQrCode("https://bip-backend-b1ew.onrender.com/ticket/validate?ticketId=${ticket!!.id}")
+        } catch (e: Exception) {
+            ticketRepository.deleteById(ticket!!.id)
+            return ResponseEntity.internalServerError().build()
+        }
+
         ticketRepository.addQrUrl(ticket.id, qrUrl)
 
         val user = userRepository.findUserById(request.userId)
 
-        emailService.sendVerificationEmail(user!!.email, qrUrl)
+        try {
+            val event = eventRepository.findById(request.eventId)
+                    ?: return ResponseEntity.notFound().build()
+            emailService.sendVerificationEmail(user!!.email, qrUrl, event.startTime, event.location)
+        } catch (e: Exception) {
+            ticketRepository.deleteById(ticket.id)
+            return ResponseEntity.internalServerError().build()
+        }
+
 
         eventRepository.decrementTickets(request.eventId)
 
@@ -59,7 +74,7 @@ class TicketController(
     @GetMapping("/validate")
     fun validateTicket(@RequestParam ticketId: Int): ResponseEntity<Unit> {
         ticketRepository.findByTicketId(ticketId)
-        ?: return ResponseEntity.notFound().build()
+        ?: return ResponseEntity.badRequest().build()
 
         ticketRepository.deleteById(ticketId)
 
